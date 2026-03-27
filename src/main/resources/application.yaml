@@ -1,0 +1,27 @@
+spring:
+
+  application:
+    name: consent.api
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/consent
+    username: root
+    password: 3571
+    driver-class-name: org.postgresql.Driver
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+
+
