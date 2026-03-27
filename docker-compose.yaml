@@ -1,0 +1,23 @@
+services:
+
+  postgresql:
+    image: postgres:18
+    container_name: postgres_consent
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 3571
+      POSTGRES_DB: consent
+    volumes:
+      - postgresql-data-consent:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d consent"]
+      retries: 3
+      timeout: 5s
+      interval: 10s
+      start_period: 30s
+
+volumes:
+  postgresql-data-consent:
