@@ -1,6 +1,7 @@
 package com.sensedia.consent.api.domain.controller;
 
 import com.sensedia.consent.api.dto.req.ConsentCreatedRequestDto;
+import com.sensedia.consent.api.dto.req.ConsentUpdatedRequestDto;
 import com.sensedia.consent.api.dto.res.ConsentCreatedResponseDto;
 import com.sensedia.consent.api.dto.res.ConsentPaginationDto;
 import com.sensedia.consent.api.dto.res.ConsentResponseDto;
@@ -85,7 +86,7 @@ public class ConsentController {
     )
     @GetMapping("/{id}")
     public ResponseEntity<ConsentResponseDto> getConsentById(@PathVariable UUID id) {
-        var response = consentService.getById(id);
+        var response = consentService.getConsentById(id);
         return ResponseEntity.ok(response);
     }
 
@@ -103,8 +104,8 @@ public class ConsentController {
             }
     )
     @PutMapping("/{id}")
-    public ResponseEntity<ConsentCreatedResponseDto> updateConsent(@PathVariable UUID id,
-                                                                   @Valid @RequestBody ConsentCreatedRequestDto requestDto) {
+    public ResponseEntity<ConsentCreatedResponseDto> updateConsentById(@PathVariable UUID id,
+                                                                       @Valid @RequestBody ConsentUpdatedRequestDto requestDto) {
         var response = consentService.updateConsentById(id, requestDto);
         return ResponseEntity.ok(response);
     }
@@ -126,6 +127,12 @@ public class ConsentController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> revokeConsent(@PathVariable UUID id) {
         var response = consentService.deleteConsentById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<Map<String, String>> getHistory() {
+        var response = consentService.getHistory();
         return ResponseEntity.ok(response);
     }
 }

@@ -1,6 +1,7 @@
 package com.sensedia.consent.api.service.constant;
 
 import com.sensedia.consent.api.dto.req.ConsentCreatedRequestDto;
+import com.sensedia.consent.api.dto.req.ConsentUpdatedRequestDto;
 import com.sensedia.consent.api.dto.res.ConsentCreatedResponseDto;
 import com.sensedia.consent.api.dto.res.ConsentPaginationDto;
 import com.sensedia.consent.api.dto.res.ConsentResponseDto;
@@ -15,9 +16,11 @@ public interface ConsentService {
 
     List<ConsentPaginationDto> getAllConsents(int page, int pageSize);
 
-    ConsentResponseDto getById(UUID id);
+    ConsentResponseDto getConsentById(UUID id);
 
-    ConsentCreatedResponseDto updateConsentById(UUID id, ConsentCreatedRequestDto requestDto);
+    ConsentCreatedResponseDto updateConsentById(UUID id, ConsentUpdatedRequestDto requestDto);
 
     String deleteConsentById(UUID id);
+
+    Map<String, String> getHistory();
 }
