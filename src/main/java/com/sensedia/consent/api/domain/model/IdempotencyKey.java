@@ -25,13 +25,10 @@ public class IdempotencyKey {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private LocalDateTime lockedAt;
 
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
-        this.lockedAt = LocalDateTime.now();
     }
 
     public IdempotencyKey() {
@@ -42,6 +39,5 @@ public class IdempotencyKey {
         this.idempotencyKey = idempotencyKey;
         this.consentId = consentId;
         this.createdAt = createdAt;
-        this.lockedAt = lockedAt;
     }
 }
