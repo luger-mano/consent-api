@@ -67,8 +67,8 @@ ConsentAPI /
 |          ├── consent
 |          ├── idempotency 
 └── ├──              
-    ├── docker_app     # Docker Compose das Aplicações
-    └── docker_db      # Docker Compose dos Bancos de Dados
+    ├── docker-compose.yaml     # Docker Compose da Aplicação, Banco de dados e Redis
+    └── Dockerfile              # Dockerfile da aplicação com multi-stage-build
 ```
 
 ---
