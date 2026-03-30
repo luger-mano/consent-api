@@ -19,6 +19,13 @@ services:
       interval: 10s
       start_period: 30s
 
+  redis:
+    image: redis:latest
+    container_name: redis_consent
+    restart: always
+    ports:
+      - "6379:6379"
+
   consent:
     image: lucasgerman0/consent-api-msb:latest
     container_name: java

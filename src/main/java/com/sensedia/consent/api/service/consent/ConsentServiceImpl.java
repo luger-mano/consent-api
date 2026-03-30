@@ -16,6 +16,7 @@ import com.sensedia.consent.api.service.idempotency.IdempotencyKeyService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -57,13 +58,13 @@ public class ConsentServiceImpl implements ConsentService {
 
         consent.setStatus(Status.ACTIVE);
         consent.setCreationDateTime(LocalDateTime.now());
-        consent.setExpirationDateTime(LocalDateTime.now().plusMinutes(2));
+        consent.setExpirationDateTime(LocalDateTime.now().plusSeconds(35));
 
+        log.info("Consent saved");
         Consent consentSaved = consentRepository.save(consent);
         mapHistory.put(String.valueOf(LocalDateTime.now()), "Invoked Method: save");
-        log.info("Consent saved");
 
-        try{
+        try {
             idempotencyKeyService.createIdempotencyKeyByKeyAndConsentId(
                     idempotencyKeyHeader, String.valueOf(consentSaved.getId())
             );
@@ -77,6 +78,7 @@ public class ConsentServiceImpl implements ConsentService {
     }
 
     @Override
+    @Cacheable(cacheNames = "consents", key = "#page + '-' + #pageSize")
     public List<ConsentPaginationDto> getAllConsents(int page, int pageSize) {
         Page<Consent> consents = consentRepository.findAll(PageRequest.of(page,
                 pageSize));
@@ -98,10 +100,12 @@ public class ConsentServiceImpl implements ConsentService {
     }
 
     @Override
+    @Cacheable(cacheNames = "consent", key = "#id")
     public ConsentResponseDto getConsentById(UUID id) {
         Consent consent = consentRepository.findById(id)
                 .orElseThrow(() -> new ConsentNotFoundException("Consent not found"));
         mapHistory.put(String.valueOf(LocalDateTime.now()), "Invoked Method: getConsentById");
+        log.info("Consent by id found");
 
         return consentMapper.consentToConsentResponseDto(consent);
     }
@@ -143,11 +147,12 @@ public class ConsentServiceImpl implements ConsentService {
     }
 
     @Override
+    @Cacheable(cacheNames = "history")
     public Map<String, String> getHistory() {
         return mapHistory;
     }
 
-    public Map<String, String> updateStatusExpiredConsent(Consent consent){
+    public Map<String, String> updateStatusExpiredConsent(Consent consent) {
         consent.setStatus(Status.EXPIRED);
         consentRepository.save(consent);
 
@@ -158,7 +163,7 @@ public class ConsentServiceImpl implements ConsentService {
         );
     }
 
-    public Map<String, String> mapResponseReceivedConsent(String consentId){
+    public Map<String, String> mapResponseReceivedConsent(String consentId) {
         return Map.of(
                 "consentId", consentId,
                 "message", "Consent request received",
