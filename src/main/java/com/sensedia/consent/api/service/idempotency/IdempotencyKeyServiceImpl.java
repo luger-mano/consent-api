@@ -1,5 +1,6 @@
 package com.sensedia.consent.api.service.idempotency;
 
+import com.sensedia.consent.api.config.exceptions.GlobalExceptionHandler;
 import com.sensedia.consent.api.domain.model.IdempotencyKey;
 import com.sensedia.consent.api.repository.IdempotencyKeyRepository;
 import jakarta.transaction.Transactional;
@@ -19,6 +20,7 @@ public class IdempotencyKeyServiceImpl implements IdempotencyKeyService {
 
     @Override
     public Map<String, String> getIdempotencyKey(String key) {
+        log.info("Finding an IdempotencyKey");
         Optional<IdempotencyKey> idempotencyOpp = idempotencyKeyRepository.findByIdempotencyKey(key);
 
         return idempotencyOpp.map(idempotencyKey -> Map.of(
@@ -35,12 +37,20 @@ public class IdempotencyKeyServiceImpl implements IdempotencyKeyService {
     @Override
     @Transactional
     public IdempotencyKey createIdempotencyKeyByKeyAndConsentId(String key, String consentId) {
-        IdempotencyKey idempotencyKey;
+        try {
+            log.info("Creating an IdempotencyKey object");
+            IdempotencyKey idempotencyKey;
 
-        idempotencyKey = new IdempotencyKey();
-        idempotencyKey.setIdempotencyKey(key);
-        idempotencyKey.setConsentId(consentId);
+            idempotencyKey = new IdempotencyKey();
+            idempotencyKey.setIdempotencyKey(key);
+            idempotencyKey.setConsentId(consentId);
 
-        return idempotencyKeyRepository.save(idempotencyKey);
+            log.info("Idempotency key saved");
+            return idempotencyKeyRepository.save(idempotencyKey);
+
+        } catch (GlobalExceptionHandler e) {
+            log.error("Failed to create an IdempotencyKey object in the database", e.getCause());
+            throw new RuntimeException(e);
+        }
     }
 }
