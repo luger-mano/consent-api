@@ -2,6 +2,7 @@ package com.sensedia.consent.api.domain.controller;
 
 import com.sensedia.consent.api.domain.enums.Status;
 import com.sensedia.consent.api.domain.model.Consent;
+import com.sensedia.consent.api.dto.req.ConsentUpdatedRequestDto;
 import com.sensedia.consent.api.dto.res.ConsentCreatedResponseDto;
 import com.sensedia.consent.api.mapper.ConsentMapper;
 import com.sensedia.consent.api.repository.ConsentRepository;
@@ -149,13 +150,17 @@ class ConsentControllerTest {
         consentSaved.setStatus(Status.REVOKED);
         consentSaved.setAdditionalInfo("Content updated");
 
-        Consent consentUpdate = consentRepository.save(consentSaved);
+        consentRepository.save(consentSaved);
 
-        ConsentCreatedResponseDto response = consentMapper.consentToConsentCreatedResponseDto(consentUpdate);
+        ConsentUpdatedRequestDto request = new ConsentUpdatedRequestDto(
+                LocalDateTime.now(),
+                Status.REVOKED,
+    "Consent updated"
+        );
 
         given()
                 .contentType(ContentType.JSON)
-                .body(response)
+                .body(request)
                 .when()
                 .put("/consents/{id}", consentSaved.getId())
                 .then()
