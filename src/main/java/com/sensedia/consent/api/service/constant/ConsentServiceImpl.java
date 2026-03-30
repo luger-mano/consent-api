@@ -114,10 +114,6 @@ public class ConsentServiceImpl implements ConsentService {
             Consent consent = consentRepository.findById(id)
                     .orElseThrow(() -> new ConsentNotFoundException("Consent not found"));
 
-            if (requestDto.expirationDateTime().isBefore(LocalDateTime.now())) {
-                throw new IllegalStateException("Expiration time should be in the future");
-            }
-
             consent.setStatus(requestDto.status());
             consent.setAdditionalInfo(requestDto.additionalInfo());
             consent.setExpirationDateTime(requestDto.expirationDateTime());
