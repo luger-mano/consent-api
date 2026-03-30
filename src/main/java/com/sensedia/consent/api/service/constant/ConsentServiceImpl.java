@@ -109,7 +109,6 @@ public class ConsentServiceImpl implements ConsentService {
     @Override
     @Transactional
     public ConsentCreatedResponseDto updateConsentById(UUID id, ConsentUpdatedRequestDto requestDto) {
-
         try {
             Consent consent = consentRepository.findById(id)
                     .orElseThrow(() -> new ConsentNotFoundException("Consent not found"));
