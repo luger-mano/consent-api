@@ -30,6 +30,5 @@ services:
       postgresql:
         condition: service_healthy
 
-
 volumes:
   postgresql-data-consent:
