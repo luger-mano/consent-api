@@ -11,6 +11,8 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableCaching
@@ -21,10 +23,6 @@ public class RedisConfig {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
 
-        objectMapper.activateDefaultTyping(
-                objectMapper.getPolymorphicTypeValidator(),
-                ObjectMapper.DefaultTyping.NON_FINAL
-        );
         return objectMapper;
     }
 
@@ -43,8 +41,12 @@ public class RedisConfig {
                         .disableCachingNullValues()
                         .entryTtl(Duration.ofSeconds(60));
 
+        Map<String, RedisCacheConfiguration> cacheConfigurationMap = new HashMap<>();
+        cacheConfigurationMap.put("springdoc", config.disableCachingNullValues());
+
         return RedisCacheManager.builder(factory)
                 .cacheDefaults(config)
+                .withInitialCacheConfigurations(cacheConfigurationMap)
                 .build();
     }
 
