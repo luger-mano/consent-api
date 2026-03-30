@@ -19,5 +19,17 @@ services:
       interval: 10s
       start_period: 30s
 
+  consent:
+    image: lucasgerman0/consentapi:latest
+    container_name: java
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: postgresql
+    depends_on:
+      postgresql:
+        condition: service_healthy
+
+
 volumes:
   postgresql-data-consent:
