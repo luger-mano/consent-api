@@ -5,7 +5,7 @@ import com.sensedia.consent.api.dto.req.ConsentUpdatedRequestDto;
 import com.sensedia.consent.api.dto.res.ConsentCreatedResponseDto;
 import com.sensedia.consent.api.dto.res.ConsentPaginationDto;
 import com.sensedia.consent.api.dto.res.ConsentResponseDto;
-import com.sensedia.consent.api.service.constant.ConsentService;
+import com.sensedia.consent.api.service.consent.ConsentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

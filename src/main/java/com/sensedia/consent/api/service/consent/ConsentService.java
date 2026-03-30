@@ -1,4 +1,4 @@
-package com.sensedia.consent.api.service.constant;
+package com.sensedia.consent.api.service.consent;
 
 import com.sensedia.consent.api.dto.req.ConsentCreatedRequestDto;
 import com.sensedia.consent.api.dto.req.ConsentUpdatedRequestDto;
