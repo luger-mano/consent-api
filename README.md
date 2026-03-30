@@ -3,6 +3,7 @@
 ![Java](https://img.shields.io/badge/Java-21-000?logo=openjdk&logoColor=fff&style=flat)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.13-6DB33F?logo=springboot&logoColor=fff&style=flat)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-4169E1?logo=postgresql&logoColor=fff&style=flat)
+![Redis](https://img.shields.io/badge/-Redis-DC382D?logo=Redis&logoColor=FFF)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=flat)
 ![SOLID](https://img.shields.io/badge/Solid-2C4F7C?logo=solid&logoColor=fff&style=flat)
 ![JUnit5](https://img.shields.io/badge/JUnit5-25A162?logo=junit5&logoColor=fff&style=flat)
@@ -44,7 +45,7 @@ O projeto utiliza as melhores tecnologias e práticas do mercado:
 | **Testcontainers** | Ambiente de testes isolado com Docker. |
 | **SOLID** | Princípios de design para código limpo e flexível. |
 | **GitHub Actions** | Esteira de automação de testes. |
-
+| **Redis** | Sistema de cache de alto desempenho. |
 ---
 
 ## 📂 Estrutura do Projeto
@@ -82,7 +83,7 @@ ConsentAPI /
 
 ### 🐳 Via Docker (Recomendado)
 
-Para subir todo o ambiente (Aplicação + Banco de Dados) de forma automatizada:
+Para subir todo o ambiente (Aplicação + Banco de Dados (PostgreSQL) + Redis) de forma automatizada:
 
 1. Clone o repositório:
    ```bash
@@ -95,7 +96,18 @@ Para subir todo o ambiente (Aplicação + Banco de Dados) de forma automatizada:
    docker-compose up -d
    ```
 
-A aplicação estará disponível em `http://localhost:8080` e no Swagger `http://localhost:8080/swagger-ui/index.html`.
+A aplicação estará disponível em `http://localhost:8080`
+e no **Swagger** `http://localhost:8080/swagger-ui/index.html`.
+
+---
+
+## Endpoints Configurados e mapeados. 
+
+[![Postman Badge](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=fff&style=flat)](https://web.postman.co/workspace/My-Workspace~912e6447-255d-4e54-8700-1363f4cb3c57/collection/32811777-1132c4d7-a70c-4140-9631-8a533befbceb?action=share&source=copy-link&creator=32811777)
+
+
+<img width="183" height="161" alt="image" src="https://github.com/user-attachments/assets/86329f5f-9a53-4dfa-9a1b-373c2aa72d88" />
+
 
 ---
 
