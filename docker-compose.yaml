@@ -20,7 +20,7 @@ services:
       start_period: 30s
 
   consent:
-    image: lucasgerman0/consentapi:latest
+    image: lucasgerman0/consent-api-msb:latest
     container_name: java
     ports:
       - "8080:8080"
