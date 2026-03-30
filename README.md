@@ -47,6 +47,31 @@ O projeto utiliza as melhores tecnologias e práticas do mercado:
 
 ---
 
+## 📂 Estrutura do Projeto
+
+```plaintext
+ConsentAPI /
+├── config
+|         ├── exceptions             
+├── domain
+|         ├── controller
+|         ├── enums
+|         ├── model            
+├── dto
+|      ├── req
+|      ├── res 
+├── mapper       
+├── repository      
+├── service
+|          ├── consent
+|          ├── idempotency 
+└── ├──              
+    ├── docker_app     # Docker Compose das Aplicações
+    └── docker_db      # Docker Compose dos Bancos de Dados
+```
+
+---
+
 ## 🚀 Como Inicializar a Aplicação
 
 ### 📋 Pré-requisitos
