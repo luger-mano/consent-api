@@ -212,6 +212,21 @@ Deleção lógica de um consentimento pelo ID.
 Consent deleted
 ```
 
+### Histórico de alterações (GET)
+Retorna todas as alterações feitas através de um histórico de ações.
+
+- **URL:** `/consents/history`
+- **Método:** `GET`
+
+**Corpo da Resposta (200 OK):**
+```json
+{"2026-03-27T18:10:13" : "Invoked Method: deleteConsentById"}
+```
+**Corpo da Resposta (204 OK):**
+```json
+{}
+```
+
 ---
 
 ## ⚙️ Versões das Ferramentas
