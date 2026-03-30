@@ -19,4 +19,6 @@ RUN addgroup -S spring && adduser -S spring -G spring
 
 USER spring
 
+EXPOSE 9002
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
