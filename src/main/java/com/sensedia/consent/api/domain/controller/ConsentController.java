@@ -130,6 +130,19 @@ public class ConsentController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(
+            summary = "Get the change history",
+            description = "Search for all changes that have been made to all methods"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Change History"),
+                    @ApiResponse(responseCode = "204", description = "History empty"),
+                    @ApiResponse(responseCode = "401", description = "Unauthorized action"),
+                    @ApiResponse(responseCode = "409", description = "There was a conflict in the action"),
+                    @ApiResponse(responseCode = "500", description = "Throw an exception / Server side error")
+            }
+    )
     @GetMapping("/history")
     public ResponseEntity<Map<String, String>> getHistory() {
         var response = consentService.getHistory();
